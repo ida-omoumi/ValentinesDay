@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 50%, #fbc2eb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: float 8s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s forwards;
+        }
+
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.4s; }
+        .card:nth-child(4) { animation-delay: 0.6s; }
+        .card:nth-child(5) { animation-delay: 0.8s; }
+        .card:nth-child(6) { animation-delay: 1s; }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .card h2 {
+            font-family: 'Pacifico', cursive;
+            color: #d6336c;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card p, .card li {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .reasons-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .reasons-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .reasons-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .reasons-list li::before {
+            content: "💕 ";
+            font-size: 1.2em;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #d6336c;
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px dashed #d6336c;
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .memory-card {
+            background: linear-gradient(135deg, #a29bfe 0%, #ffeaa7 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card .emoji {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .final-message {
+            text-align: center;
+            font-size: 1.3em;
+            color: #d6336c;
+            font-style: italic;
+            padding: 30px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .date-counter {
+            text-align: center;
+            font-size: 1.5em;
+            color: #d6336c;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .card {
+                padding: 25px;
+            }
+            .card h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-background" id="hearts"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Happy Valentine's Day ❤️</h1>
+            <p>To the love of my life</p>
+        </div>
+
+        <div class="card">
+            <h2>💝 Why I Love You</h2>
+            <ul class="reasons-list">
+                <li>Your smile lights up my entire world and makes every day brighter</li>
+                <li>The way you always know how to make me laugh, even on my worst days</li>
+                <li>Your kindness and compassion toward everyone around you</li>
+                <li>How you support my dreams and believe in me</li>
+                <li>The little things you do that show you're thinking of me</li>
+                <li>Your strength and the way you handle challenges with grace</li>
+                <li>How comfortable and safe I feel in your arms</li>
+                <li>The way you listen to me and truly understand</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>✨ How You Make Me Feel</h2>
+            <p>When I'm with you, I feel like the luckiest person in the world. You make me feel cherished, understood, and deeply loved in ways I never thought possible.</p>
+            <p>You bring out the best in me and make me want to be a better person every day. Your presence fills my heart with warmth and my life with joy.</p>
+            <p>With you, I feel safe to be completely myself. You've shown me what true love feels like, and I'm forever grateful for every moment we share together.</p>
+        </div>
+
+        <div class="card">
+            <h2>📸 Our Memories</h2>
+            <div class="photo-placeholder">
+                💗 Add your favorite photo of you two together here! 💗<br>
+                (You can edit this HTML file to add an image:<br>
+                Replace this div with: &lt;img src="your-photo.jpg" style="width:100%; border-radius:15px;"&gt;)
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎉 Special Moments</h2>
+            <div class="memories-grid">
+                <div class="memory-card">
+                    <div class="emoji">🌟</div>
+                    <strong>NYC Captain America</strong>
+                    <p>The beginning of forever</p>
+                </div>
+                <div class="memory-card">
+                    <div class="emoji">🌙</div>
+                    <strong>Late Night Talks</strong>
+                    <p>Hours feel like minutes</p>
+                </div>
+                <div class="memory-card">
+                    <div class="emoji">🎢</div>
+                    <strong>Adventures</strong>
+                    <p>Making memories together</p>
+                </div>
+                <div class="memory-card">
+                    <div class="emoji">🏠</div>
+                    <strong>Quiet Moments</strong>
+                    <p>Just being together</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>💌 A Message For You</h2>
+            <p class="final-message">
+                "Being with you feels like coming home. You are my best friend, my partner, and my greatest love. Thank you for choosing me every day, for your patience, your laughter, and your beautiful heart. I can't wait to create more memories with you. I love you more than words could ever express. Happy Valentine's Day, my love. ❤️"
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="date-counter">
+                💕 Every day with you is a gift 💕
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts animation
+        const heartsContainer = document.getElementById('hearts');
+        const heartEmojis = ['❤️', '💕', '💖', '💗', '💝', '💘'];
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+        
+        // Create hearts periodically
+        setInterval(createHeart, 800);
+        
+        // Create initial hearts
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createHeart, i * 200);
+        }
+    </script>
+</body>
+</html>
