@@ -175,9 +175,15 @@
 
         .memories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             margin: 20px 0;
+        }
+        
+        @media (min-width: 768px) {
+            .memories-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
         .memory-card {
@@ -261,7 +267,7 @@
 
         <div class="card">
             <h2>📸 Our Memories</h2>
-            <img src="uuid=EEDCA09C-518B-4FB6-A66E-B288C7B8DEE3&code=001&library=3&type=1&mode=1&loc=true&cap=true.png" style="width:100%; border-radius:15px;"&gt;)>
+            <img src="our-photo.jpg" style="width:100%; border-radius:15px;"&gt;)>
         </div>
 
         <div class="card">
