@@ -672,7 +672,7 @@
                     <p>You are my best friend, my confidant, my adventure partner, and my home. Every day with you is a gift, and I cherish every moment we share together.</p>
                     <p>Thank you for being you - for your kindness, your humor, your strength, and your endless capacity to make me smile. I love you more than all the stars in the sky.</p>
                     <p>Forever and always,</p>
-                    <div class="letter-signature">Your Hamishegi ♥</div>
+                    <div class="letter-signature">Your Sweetheart ♥</div>
                 </div>
             </div>
         </section>
@@ -710,7 +710,7 @@
         // Time counter
         function updateCounter() {
             // Set your relationship start date here
-            const startDate = new Date('2021-10-01');
+            const startDate = new Date('2022-10-01'); // October 1, 2022
             const now = new Date();
             const diff = now - startDate;
 
@@ -773,31 +773,31 @@
                 date: "November, 2022",
                 title: "Our First Date",
                 description: "Our first video call - I was so nervous but you made me feel so comfortable. Talking to you felt like coming home.",
-                hasImage: true
+                image: "2.jpeg"
             },
             {
                 date: "June, 2023",
                 title: "Seeing You In Person",
                 description: "The first time I saw you in real life. My heart was racing, and then you smiled at me. Nothing could have prepared me for how perfect that moment would be.",
-                hasImage: true
+                image: "3.jpeg"
             },
             {
                 date: "July, 2024",
                 title: "Our First Trip to Shiraz",
                 description: "A whole day exploring Shiraz together. Every moment was an adventure, every street corner a new memory. Just you and me against the world.",
-                hasImage: true
+                image: "4.jpeg"
             },
             {
                 date: "July, 2024",
                 title: "Our First Party Together",
                 description: "Dancing, laughing, and celebrating together. Having you by my side made everything more fun. We were in our own little world all night.",
-                hasImage: true
+                image: "5.jpeg"
             },
             {
                 date: "December, 2025",
                 title: "Our First Snow Day",
                 description: "That amazing night when it snowed. We stayed out in the magic until you got me home by 5am. Cold hands, warm hearts, and memories I'll treasure forever.",
-                hasImage: true
+                image: "6.jpeg"
             }
         ];
 
@@ -807,32 +807,59 @@
             timelineEvents.forEach((event, index) => {
                 const item = document.createElement('div');
                 item.className = 'timeline-item';
+                
+                let imageHTML = '';
+                if (event.image && event.image.trim() !== '') {
+                    imageHTML = `<img src="${event.image}" alt="${event.title}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 15px; margin-top: 1rem; cursor: pointer;" onclick="openModal('${event.image}')" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="timeline-image" style="display: none;">❌ Image failed to load. Check URL and repo visibility.</div>`;
+                } else {
+                    imageHTML = '<div class="timeline-image">📸 Your photo here</div>';
+                }
+                
                 item.innerHTML = `
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-date">${event.date}</div>
                         <h3 class="timeline-title">${event.title}</h3>
                         <p class="timeline-description">${event.description}</p>
-                        ${event.hasImage ? '<div class="timeline-image">📸 Your photo here</div>' : ''}
+                        ${imageHTML}
                     </div>
                 `;
                 timeline.appendChild(item);
             });
         }
 
+        // Gallery images - Just use the filename (all in main folder)
+        const galleryImages = [
+            "7.jpeg",
+            "8.jpeg",
+            "9.jpeg",
+            "10.jpeg",
+            "11.jpeg",
+            "12.jpeg",
+            "13.jpeg",
+            "14.jpeg",
+            "15.jpeg"
+        ];
+
         // Gallery
         function populateGallery() {
             const gallery = document.getElementById('galleryGrid');
-            const galleryItems = ['📷', '💑', '🌅', '🎉', '🌹', '✨', '🌙', '💝', '🎭'];
+            const placeholderEmojis = ['📷', '💑', '🌅', '🎉', '🌹', '✨', '🌙', '💝', '🎭'];
             
-            galleryItems.forEach((emoji, index) => {
+            galleryImages.forEach((imageUrl, index) => {
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
-                item.innerHTML = `<div class="gallery-placeholder">${emoji}</div>`;
-                item.onclick = () => {
-                    // Here you would load actual images
-                    alert('Replace with your actual photos!');
-                };
+                
+                if (imageUrl && imageUrl.trim() !== '') {
+                    item.innerHTML = `<img src="${imageUrl}" alt="Memory ${index + 1}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.parentElement.innerHTML='<div class=\\'gallery-placeholder\\'>❌ Failed to load</div>'">`;
+                    item.onclick = () => openModal(imageUrl);
+                } else {
+                    item.innerHTML = `<div class="gallery-placeholder">${placeholderEmojis[index]}</div>`;
+                    item.onclick = () => {
+                        alert('Add your GitHub image URL to galleryImages array!');
+                    };
+                }
                 gallery.appendChild(item);
             });
         }
@@ -843,6 +870,13 @@
         });
 
         // Modal functions
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = imageSrc;
+        }
+
         function closeModal() {
             document.getElementById('imageModal').classList.remove('active');
         }
